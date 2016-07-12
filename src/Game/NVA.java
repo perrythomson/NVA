@@ -9,7 +9,7 @@ import Game.players.Ninja;
  */
 public class NVA {
 
-    private Ninja n = new Ninja();
-    private Alien a = new Alien();
+    private Ninja n = new Ninja(); //instantiation of a new reference
+    private Alien a = new Alien(); //instantiation of a new reference
 
 }
