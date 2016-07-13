@@ -18,7 +18,7 @@ public class PlayNVA {
         System.out.println("What is your name?");
 
         String name = scanner.nextLine(); //collect input for the player's name from above
-        System.out.println("Welcome, "+name);
+        System.out.println("Welcome, " + name + "!");
 
        // System.out.println("Are you a Ninja or Alien? [ninja/alien]");
        // String playerType = scanner.nextLine();
@@ -32,14 +32,16 @@ public class PlayNVA {
        // }
 
         String playerType = "";
-        while (!(playerType.equalsIgnoreCase("ninja") || playerType.equalsIgnoreCase("alien"))) {
-            System.out.println("Are you a Ninja or an Alien? [ninja/alien]");
+        while (!(playerType.equalsIgnoreCase("ninja") || playerType.equalsIgnoreCase("alien") || playerType.equalsIgnoreCase("predator"))) {
+            System.out.println("Are you a Ninja, Alien or Predator? [ninja/alien/predator]");
             playerType = scanner.nextLine();
 
             if (playerType.equalsIgnoreCase("ninja")) {
                 System.out.println("Noble choice, the Ninja is stealthy and fast.");
             } else if (playerType.equalsIgnoreCase("alien")) {
                 System.out.println("Powerful choice, the Alien is scary and strong.");
+            } else if (playerType.equalsIgnoreCase("predator")) {
+                System.out.println("The best choice, the Predator is invincible!");
             } else {
                 System.out.println("Invalid player type");
             }
@@ -67,11 +69,14 @@ public class PlayNVA {
 
         String weapon = "";
         while(!((playerType.equalsIgnoreCase("ninja") && ((weapon.equalsIgnoreCase("blade")) || (weapon.equalsIgnoreCase("star")))) ||
-                ((playerType.equalsIgnoreCase("alien") && ((weapon.equalsIgnoreCase("claw")) || (weapon.equalsIgnoreCase("laser"))))))) {
+                ((playerType.equalsIgnoreCase("alien") && ((weapon.equalsIgnoreCase("claw")) || (weapon.equalsIgnoreCase("laser"))))) ||
+                ((playerType.equalsIgnoreCase("predator") && ((weapon.equalsIgnoreCase("shoulder cannon")) || (weapon.equalsIgnoreCase("razor boomerang"))))))) {
             if (playerType.equalsIgnoreCase("ninja")) {
                 System.out.println("Okay ninja, choose your weapon [blade/star]");
-            } else {
+            } else if (playerType.equalsIgnoreCase("alien")){
                 System.out.println("Okay alien, choose your weapon[claw/laser]");
+            } else {
+                System.out.println("Okay predator, choose your weapon[shoulder cannon/razor boomerang]");
             }
             weapon = scanner.nextLine();
             if (playerType.equalsIgnoreCase("ninja") && weapon.equalsIgnoreCase("blade")) {
@@ -82,6 +87,10 @@ public class PlayNVA {
                 System.out.println("The alien claw is close range, but deals more damage.");
             } else if (playerType.equalsIgnoreCase("alien") && weapon.equalsIgnoreCase("laser")) {
                 System.out.println("The alien laser does less damage, but keeps you at a safer range.");
+            } else if (playerType.equalsIgnoreCase("predator") && weapon.equalsIgnoreCase("shoulder cannon")) {
+                System.out.println("The predator shoulder cannon is destructive far and deals the most damage.");
+            } else if (playerType.equalsIgnoreCase("predator") && weapon.equalsIgnoreCase("razor boomerang")) {
+                System.out.println("The predator razor boomerang is most destructive in close combat.");
             } else {
                 System.out.println("Invalid weapon!");
             }
@@ -91,14 +100,16 @@ public class PlayNVA {
         // String location = scanner.nextLine();
 
         String location = "";
-        while (!(location.equalsIgnoreCase("forest") || location.equalsIgnoreCase("space"))) {
-            System.out.println("Choose your location? [forest/space]");
+        while (!(location.equalsIgnoreCase("forest") || location.equalsIgnoreCase("space") || location.equalsIgnoreCase("jungle"))) {
+            System.out.println("Choose your location? [forest/space/jungle]");
             location = scanner.nextLine();
 
             if (location.equalsIgnoreCase("forest")) {
                 System.out.println("The forest gives the ninja a slight stealth advantage.");
             } else if (location.equalsIgnoreCase("space")) {
                 System.out.println("Space gives the alien a slight strength advantage.");
+            } else if (location.equalsIgnoreCase("jungle")) {
+                System.out.println("The jungle gives the predator a superior advantage.");
             } else {
                 System.out.println("Invalid location type");
             }
