@@ -1,5 +1,7 @@
 package Game.players;
 
+import Game.util.RandInt;
+
 /**
  * Created by perrythomson on 7/11/16.
  */
@@ -30,6 +32,11 @@ public class Ninja extends Player {
             damage = rawDamageDealt - (starRangeProtection * accuracy);
         }
         this.removeHealth(damage);
+        return damage;
+    }
+
+    private int getRandomBladeDamage() {
+        int damage = RandInt.randomInt(1,bladeMaxDamage);
         return damage;
     }
 
