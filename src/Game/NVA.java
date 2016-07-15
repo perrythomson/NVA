@@ -78,14 +78,13 @@ public class NVA {
     public void setLocation(){
 
         while (!(location.equalsIgnoreCase("forest") || location.equalsIgnoreCase("space") || location.equalsIgnoreCase("jungle"))) {
-            System.out.println("Choose your location? [forest/space/jungle]");
+            System.out.println("Choose your location? [forest/space]");
             location = PlayNVA.scanner.nextLine();
 
             if (location.equalsIgnoreCase("forest")) {
                 System.out.println("The forest gives the ninja a slight stealth advantage.");
             } else if (location.equalsIgnoreCase("space")) {
                 System.out.println("Space gives the alien a slight strength advantage.");
-
             } else {
                 System.out.println("Invalid location type");
             }

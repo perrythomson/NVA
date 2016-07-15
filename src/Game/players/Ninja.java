@@ -36,9 +36,32 @@ public class Ninja extends Player {
     }
 
     private int getRandomBladeDamage() {
-        int damage = RandInt.randomInt(1,bladeMaxDamage);
-        return damage;
+        bladeMaxDamage = RandInt.randomInt(1,bladeMaxDamage);
+        return bladeMaxDamage;
     }
 
+    private int getRandomStarDamage() {
+        starMaxDamage = RandInt.randomInt(1,starMaxDamage);
+        return starMaxDamage;
+    }
 
+    private int getRandomHitsPerRole() {
+        maxHitsPerRole = RandInt.randomInt(1,maxHitsPerRole);
+        return maxHitsPerRole;
+    }
+
+    private int getRandomAccuracy() {
+        accuracy = RandInt.randomInt(1,accuracy);
+        return accuracy;
+    }
+
+    private int getRandomBladeProtection() {
+        bladeRangeProtection = RandInt.randomInt(1,bladeRangeProtection);
+        return bladeRangeProtection;
+    }
+
+    private int getRandomStarProtection() {
+        starRangeProtection = RandInt.randomInt(1,starRangeProtection);
+        return starRangeProtection;
+    }
 }
