@@ -57,18 +57,18 @@ public class NVA {
                 System.out.println("Okay ninja, choose your weapon [blade/star]");
             } else if (playerType.equalsIgnoreCase("alien")){
                 System.out.println("Okay alien, choose your weapon[claw/laser]");
-
             }
+
             weapon = PlayNVA.scanner.nextLine();
+
             if (playerType.equalsIgnoreCase("ninja") && weapon.equalsIgnoreCase("blade")) {
-                System.out.println("The ninja blad is good at close range, but deals more damage.");
+                System.out.println("The ninja blade is good at close range, but deals more damage.");
             } else if (playerType.equalsIgnoreCase("ninja") && weapon.equalsIgnoreCase("star")) {
                 System.out.println("The ninja star does less damage, but keeps you at a safer range.");
             } else if (playerType.equalsIgnoreCase("alien") && weapon.equalsIgnoreCase("claw")) {
                 System.out.println("The alien claw is close range, but deals more damage.");
             } else if (playerType.equalsIgnoreCase("alien") && weapon.equalsIgnoreCase("laser")) {
                 System.out.println("The alien laser does less damage, but keeps you at a safer range.");
-                System.out.println("The predator razor boomerang is most destructive in close combat.");
             } else {
                 System.out.println("Invalid weapon!");
             }
@@ -77,12 +77,13 @@ public class NVA {
 
     public void setLocation(){
 
-        while (!(location.equalsIgnoreCase("forest") || location.equalsIgnoreCase("space") || location.equalsIgnoreCase("jungle"))) {
+        while (!(location.equalsIgnoreCase("forest") || location.equalsIgnoreCase("space"))) {
             System.out.println("Choose your location? [forest/space]");
+
             location = PlayNVA.scanner.nextLine();
 
             if (location.equalsIgnoreCase("forest")) {
-                System.out.println("The forest gives the ninja a slight stealth advantage.");
+                System.out.println("The forest gives the ninja a stealth advantage.");
             } else if (location.equalsIgnoreCase("space")) {
                 System.out.println("Space gives the alien a slight strength advantage.");
             } else {
@@ -93,10 +94,9 @@ public class NVA {
 
 
     public void setSpecial() {
-        while (!(special.equalsIgnoreCase("speed") || playerType.equalsIgnoreCase("power") || special.equalsIgnoreCase("pain"))) {
+        while (!(special.equalsIgnoreCase("speed") || special.equalsIgnoreCase("power") || special.equalsIgnoreCase("pain"))) {
             System.out.println("Choose your special attack? [speed/power/pain]");
             special = PlayNVA.scanner.nextLine();
-
             if (special.equalsIgnoreCase("speed")) {
                 System.out.println("Speed gives the the player a high chance of making a second hit at 20% damage of the first hit.");
             } else if (special.equalsIgnoreCase("power")) {
@@ -115,13 +115,21 @@ public class NVA {
         if(playerType.equalsIgnoreCase("ninja")) {
             ninja.setPlayerName(name);
             ninja.setPlayerWeapon(weapon);
+            ninja.setBattleLocation(location);
+            ninja.setSpecialGift(special);
             alien.setPlayerName("Twinkle Toes");
             alien.setPlayerWeapon("laser");
+            alien.setBattleLocation(location);
+            alien.setSpecialGift(special);
         } else {
             alien.setPlayerName(name);
             alien.setPlayerWeapon(weapon);
+            alien.setBattleLocation(location);
+            alien.setSpecialGift(special);
             ninja.setPlayerName("Mr Fuzzy Jingles");
             ninja.setPlayerWeapon("star");
+            ninja.setBattleLocation(location);
+            ninja.setSpecialGift(special);
         }
         System.out.println(" ");
         System.out.println("**********************************************");

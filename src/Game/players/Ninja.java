@@ -13,55 +13,80 @@ public class Ninja extends Player {
     private int starRangeProtection = 4;
     private int maxHitsPerRole = 4;
     private int accuracy = 4;
+    private int forestProtection = 6;
+
+
+
+    private int getRandomBladeDamage() {
+        int damage = RandInt.randomInt(1, bladeMaxDamage);
+        return damage;
+    }
+    private int getRandomStarDamage() {
+        int damage = RandInt.randomInt(1, starMaxDamage);
+        return damage;
+    }
+    private int getRandomHitsPerRole() {
+        int damage = RandInt.randomInt(1, maxHitsPerRole);
+        return damage;
+    }
+    private int getRandomAccuracy() {
+        int damage = RandInt.randomInt(1, accuracy);
+        return damage;
+    }
+    private int getRandomBladeProtection() {
+        int damage = RandInt.randomInt(1, bladeRangeProtection);
+        return damage;
+    }
+    private int getRandomStarProtection() {
+        int damage = RandInt.randomInt(1, starRangeProtection);
+        return damage;
+    }
+
+    private int getForestProtection() {
+        int protection = 0;
+
+        if (getBattleLocation().equalsIgnoreCase("forest")) {
+           protection = RandInt.randomInt(0, forestProtection);
+        }
+        return protection;
+
+    }
+
+
+
+
+
+
 
     public int ninjaDamageGivenCalculator() {
-        int damage = 0;
-        if(getPlayerWeapon().equalsIgnoreCase("blade")) {
-            damage = bladeMaxDamage * maxHitsPerRole * accuracy;
+        int damage = 1;
+        int protection = 0;
+        if (getPlayerWeapon().equalsIgnoreCase("blade")) {
+            damage = getRandomBladeDamage() * getRandomHitsPerRole() * getRandomAccuracy();
         } else {
-            damage = starMaxDamage * maxHitsPerRole * accuracy;
+            damage = getRandomStarDamage() * getRandomHitsPerRole() * getRandomAccuracy();
         }
-        return damage;
+        return getSpecialDamage(damage);
     }
 
     public int ninjaDamageReceivedCalculator(int rawDamageDealt) {
-        int damage = 0;
-        if(getPlayerWeapon().equalsIgnoreCase("blade")) {
-            damage = rawDamageDealt - (bladeRangeProtection * accuracy);
+        int damage = 1;
+        int protection = 0;
+        if (getPlayerWeapon().equalsIgnoreCase("blade")) {
+            damage = rawDamageDealt - (getRandomBladeProtection() * getRandomAccuracy());
         } else {
-            damage = rawDamageDealt - (starRangeProtection * accuracy);
+            damage = rawDamageDealt - (getRandomStarProtection() * getRandomAccuracy());
+        }
+        if(rawDamageDealt > protection + getForestProtection()) {
+            damage = rawDamageDealt - (protection + getForestProtection());
         }
         this.removeHealth(damage);
         return damage;
+
     }
 
-    private int getRandomBladeDamage() {
-        bladeMaxDamage = RandInt.randomInt(1,bladeMaxDamage);
-        return bladeMaxDamage;
-    }
 
-    private int getRandomStarDamage() {
-        starMaxDamage = RandInt.randomInt(1,starMaxDamage);
-        return starMaxDamage;
-    }
 
-    private int getRandomHitsPerRole() {
-        maxHitsPerRole = RandInt.randomInt(1,maxHitsPerRole);
-        return maxHitsPerRole;
-    }
 
-    private int getRandomAccuracy() {
-        accuracy = RandInt.randomInt(1,accuracy);
-        return accuracy;
-    }
 
-    private int getRandomBladeProtection() {
-        bladeRangeProtection = RandInt.randomInt(1,bladeRangeProtection);
-        return bladeRangeProtection;
-    }
-
-    private int getRandomStarProtection() {
-        starRangeProtection = RandInt.randomInt(1,starRangeProtection);
-        return starRangeProtection;
-    }
 }

@@ -1,5 +1,7 @@
 package Game.players;
 
+import Game.util.RandInt;
+
 /**
  * Created by perrythomson on 7/11/16.
  */
@@ -11,27 +13,74 @@ public class Alien extends Player {
     private int laserRangeProtection = 14;
     private int maxHitsPerRole = 4;
     private int accuracy = 3;
+    private int spaceRoids = 4;
 
-    public int alienDamageGivenCalculator() {
+    private int getClawMaxDamage() {
+        int damage = RandInt.randomInt(1, clawMaxDamage);
+        return damage;
+    }
+    private int getLaserMaxDamage() {
+        int damage = RandInt.randomInt(1, laserMaxDamage);
+        return damage;
+    }
+    private int getRandomHitsPerRole() {
+        int damage = RandInt.randomInt(1, maxHitsPerRole);
+        return damage;
+    }
+    private int getRandomAccuracy() {
+        int damage = RandInt.randomInt(1, accuracy);
+        return damage;
+    }
+    private int getClawRangeProtection() {
+        int damage = RandInt.randomInt(1, clawRangeProtection);
+        return damage;
+    }
+    private int getLaserRangeProtection() {
+        int damage = RandInt.randomInt(1, laserRangeProtection);
+        return damage;
+    }
+    private int getSpaceRoids() {
         int damage = 0;
-        if(getPlayerWeapon().equalsIgnoreCase("claw")) {
-            damage = clawMaxDamage * maxHitsPerRole * accuracy;
-        } else {
-            damage = laserMaxDamage * maxHitsPerRole * accuracy;
+
+        if (getBattleLocation().equalsIgnoreCase("space")) {
+            damage = RandInt.randomInt(0, spaceRoids);
         }
         return damage;
     }
 
-    public int alienDamageReceivedCalculator(int rawDamageDealt) {
+
+
+    public int alienDamageGivenCalculator() {
         int damage = 0;
+
         if(getPlayerWeapon().equalsIgnoreCase("claw")) {
-            damage = rawDamageDealt - (clawRangeProtection * accuracy);
+            damage = getClawMaxDamage() * getRandomHitsPerRole() * getRandomAccuracy();
         } else {
-            damage = rawDamageDealt - (laserRangeProtection * accuracy);
+            damage = getLaserMaxDamage() * getRandomHitsPerRole() * getRandomAccuracy();
+        }
+//        return damage + getSpaceRoids();
+        return getSpecialDamage(damage);
+
+    }
+
+
+
+    public int alienDamageReceivedCalculator(int rawDamageDealt) {
+        int damage = 1;
+        int protection = 0;
+        if(getPlayerWeapon().equalsIgnoreCase("claw")) {
+            damage = rawDamageDealt - (getClawRangeProtection() * getRandomAccuracy());
+        } else {
+            damage = rawDamageDealt - (getLaserRangeProtection() * getRandomAccuracy());
+        }
+
+        if(rawDamageDealt > protection) {
+            damage = rawDamageDealt - protection;
         }
         this.removeHealth(damage);
         return damage;
     }
+
 
 }
 
