@@ -22,27 +22,23 @@ public class NVA {
     private String special = "";
 
 
-
-
     public void setName() {
         System.out.println("What is your name?");
         name = PlayNVA.scanner.nextLine();
-        System.out.println("Welcome, "+name);
+        System.out.println("Welcome, " + name);
 
     }
 
 
     public void setPlayerType() {
-        while (!(playerType.equalsIgnoreCase("ninja") || playerType.equalsIgnoreCase("alien") || playerType.equalsIgnoreCase("predator"))) {
-            System.out.println("Are you a Ninja, Alien or Predator? [ninja/alien/predator]");
+        while (!(playerType.equalsIgnoreCase("ninja") || playerType.equalsIgnoreCase("alien"))) {
+            System.out.println("Are you a Ninja or Alien? [ninja/alien]");
             playerType = PlayNVA.scanner.nextLine();
 
             if (playerType.equalsIgnoreCase("ninja")) {
                 System.out.println("Noble choice, the Ninja is stealthy and fast.");
             } else if (playerType.equalsIgnoreCase("alien")) {
                 System.out.println("Powerful choice, the Alien is scary and strong.");
-            } else if (playerType.equalsIgnoreCase("predator")) {
-                System.out.println("The best choice, the Predator is invincible!");
             } else {
                 System.out.println("Invalid player type");
             }
@@ -51,11 +47,11 @@ public class NVA {
     }
 
     public void setWeapon() {
-        while(!((playerType.equalsIgnoreCase("ninja") && ((weapon.equalsIgnoreCase("blade")) || (weapon.equalsIgnoreCase("star")))) ||
+        while (!((playerType.equalsIgnoreCase("ninja") && ((weapon.equalsIgnoreCase("blade")) || (weapon.equalsIgnoreCase("star")))) ||
                 ((playerType.equalsIgnoreCase("alien") && ((weapon.equalsIgnoreCase("claw")) || (weapon.equalsIgnoreCase("laser"))))))) {
             if (playerType.equalsIgnoreCase("ninja")) {
                 System.out.println("Okay ninja, choose your weapon [blade/star]");
-            } else if (playerType.equalsIgnoreCase("alien")){
+            } else if (playerType.equalsIgnoreCase("alien")) {
                 System.out.println("Okay alien, choose your weapon[claw/laser]");
             }
 
@@ -75,9 +71,9 @@ public class NVA {
         }
     }
 
-    public void setLocation(){
+    public void setLocation() {
 
-        while (!(location.equalsIgnoreCase("forest") || location.equalsIgnoreCase("space"))) {
+        while (!(location.equalsIgnoreCase("forest") || location.equalsIgnoreCase("ocean") || location.equalsIgnoreCase("space"))) {
             System.out.println("Choose your location? [forest/space]");
 
             location = PlayNVA.scanner.nextLine();
@@ -86,8 +82,10 @@ public class NVA {
                 System.out.println("The forest gives the ninja a stealth advantage.");
             } else if (location.equalsIgnoreCase("space")) {
                 System.out.println("Space gives the alien a slight strength advantage.");
+            } else if (location.equalsIgnoreCase("ocean")) {
+                System.out.println("Ocean leaves you vulnerable for a shark attack.");
             } else {
-                System.out.println("Invalid location type");
+                System.out.println("Invalid location type!");
             }
         }
     }
@@ -104,7 +102,7 @@ public class NVA {
             } else if (special.equalsIgnoreCase("pain")) {
                 System.out.println("Pain has a small chance of inflicting a permanent penalty on the opponent, decreasing their overall effectiveness by 10%.");
             } else {
-                System.out.println("Invalid special type");
+                System.out.println("Invalid special type!");
             }
         }
     }
@@ -112,7 +110,7 @@ public class NVA {
 
     public void startBattle() {
 
-        if(playerType.equalsIgnoreCase("ninja")) {
+        if (playerType.equalsIgnoreCase("ninja")) {
             ninja.setPlayerName(name);
             ninja.setPlayerWeapon(weapon);
             ninja.setBattleLocation(location);
@@ -135,32 +133,39 @@ public class NVA {
         System.out.println("**********************************************");
         System.out.println("Time to play!");
         System.out.println(" ");
-        while(alien.getHealth() > 0 && ninja.getHealth() > 0) {
+        while (alien.getHealth() > 0 && ninja.getHealth() > 0) {
+
             int alienDamageReceived = alien.alienDamageReceivedCalculator(ninja.ninjaDamageGivenCalculator());
-            System.out.println(ninja.getPlayerName()+" attacks with the "+ninja.getPlayerWeapon()+" and deals "+alienDamageReceived+" points of damage.");
-            int ninjaDamageReceived = ninja.ninjaDamageReceivedCalculator(alien.alienDamageGivenCalculator());
-            System.out.println(alien.getPlayerName()+" attacks with the "+alien.getPlayerWeapon()+" and deals "+ninjaDamageReceived+" points of damage.");
-            System.out.println(ninja.getPlayerName()+" Heath: "+ninja.getHealth()+"  vs  "+alien.getPlayerName()+" Health: "+alien.getHealth());
 
-            System.out.println(" ");
-            System.out.println("Press [enter] to take another turn.");
-            String turn = PlayNVA.scanner.nextLine();
-            System.out.println(" ");
+            System.out.println(ninja.getPlayerName() + " attacks with the " + ninja.getPlayerWeapon() + " and deals " + alienDamageReceived + " points of damage.");
+            {  // if statement needed for shark attack
+
+                int ninjaDamageReceived = ninja.ninjaDamageReceivedCalculator(alien.alienDamageGivenCalculator());
+                System.out.println(alien.getPlayerName() + " attacks with the " + alien.getPlayerWeapon() + " and deals " + ninjaDamageReceived + " points of damage.");
+
+                System.out.println(ninja.getPlayerName() + " Heath: " + ninja.getHealth() + "  vs  " + alien.getPlayerName() + " Health: " + alien.getHealth());
+                System.out.println(" ");
+                System.out.println("Press [enter] to take another turn.");
+                String turn = PlayNVA.scanner.nextLine();
+                System.out.println(" ");
+            }
+
+            System.out.println("**********************************************");
+
+
+            if (ninja.getHealth() > 0) {
+                System.out.println(ninja.getPlayerName() + " Wins!!!");
+                System.out.println("Health Remaining: " + ninja.getPlayerName());
+            } else if (alien.getHealth() > 0) {
+                System.out.println(alien.getPlayerName() + " Wins!!!");
+                System.out.println("Health Remaining: " + alien.getPlayerName());
+            } else {
+                System.out.println("Everyone Died!!!");
+                System.out.println(ninja.getPlayerName() + " and " + alien.getPlayerName() + " both lose.");
+            }
+            System.out.println("**********************************************");
         }
 
-        System.out.println("**********************************************");
-        if(ninja.getHealth() > 0) {
-            System.out.println(ninja.getPlayerName()+" Wins!!!");
-            System.out.println("Health Remaining: "+ninja.getPlayerName());
-        } else if(alien.getHealth() > 0) {
-            System.out.println(alien.getPlayerName()+" Wins!!!");
-            System.out.println("Health Remaining: "+alien.getPlayerName());
-        } else {
-            System.out.println("Everyone Died!!!");
-            System.out.println(ninja.getPlayerName()+" and "+alien.getPlayerName()+" both lose.");
-        }
-        System.out.println("**********************************************");
+
     }
-
-
 }

@@ -16,27 +16,31 @@ public class Ninja extends Player {
     private int forestProtection = 6;
 
 
-
     private int getRandomBladeDamage() {
         int damage = RandInt.randomInt(1, bladeMaxDamage);
         return damage;
     }
+
     private int getRandomStarDamage() {
         int damage = RandInt.randomInt(1, starMaxDamage);
         return damage;
     }
+
     private int getRandomHitsPerRole() {
         int damage = RandInt.randomInt(1, maxHitsPerRole);
         return damage;
     }
+
     private int getRandomAccuracy() {
         int damage = RandInt.randomInt(1, accuracy);
         return damage;
     }
+
     private int getRandomBladeProtection() {
         int damage = RandInt.randomInt(1, bladeRangeProtection);
         return damage;
     }
+
     private int getRandomStarProtection() {
         int damage = RandInt.randomInt(1, starRangeProtection);
         return damage;
@@ -46,7 +50,7 @@ public class Ninja extends Player {
         int protection = 0;
 
         if (getBattleLocation().equalsIgnoreCase("forest")) {
-           protection = RandInt.randomInt(0, forestProtection);
+            protection = RandInt.randomInt(0, forestProtection);
         }
         return protection;
 
@@ -55,12 +59,9 @@ public class Ninja extends Player {
 
 
 
-
-
-
     public int ninjaDamageGivenCalculator() {
-        int damage = 1;
-        int protection = 0;
+        int damage = 0;
+        int protection = 1;
         if (getPlayerWeapon().equalsIgnoreCase("blade")) {
             damage = getRandomBladeDamage() * getRandomHitsPerRole() * getRandomAccuracy();
         } else {
@@ -69,24 +70,33 @@ public class Ninja extends Player {
         return getSpecialDamage(damage);
     }
 
+//- getSharkAttack(damage)
+
     public int ninjaDamageReceivedCalculator(int rawDamageDealt) {
         int damage = 1;
         int protection = 0;
-        if (getPlayerWeapon().equalsIgnoreCase("blade")) {
-            damage = rawDamageDealt - (getRandomBladeProtection() * getRandomAccuracy());
+        int randNum = RandInt.randomInt(0, 100);
+
+
+        if(getPlayerWeapon().equalsIgnoreCase("blade")) {
+            damage = rawDamageDealt - (getRandomBladeProtection() * getRandomAccuracy() * getForestProtection());
         } else {
-            damage = rawDamageDealt - (getRandomStarProtection() * getRandomAccuracy());
+            damage = rawDamageDealt - (getRandomStarProtection() * getRandomAccuracy() * getForestProtection());
         }
-        if(rawDamageDealt > protection + getForestProtection()) {
-            damage = rawDamageDealt - (protection + getForestProtection());
+
+        rawDamageDealt += this.getSharkAttack();
+        if(rawDamageDealt > protection) {
+            damage = rawDamageDealt - protection;
         }
         this.removeHealth(damage);
         return damage;
-
     }
 
 
 
-
-
 }
+
+
+
+
+

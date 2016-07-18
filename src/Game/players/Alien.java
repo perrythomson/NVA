@@ -48,37 +48,37 @@ public class Alien extends Player {
         return damage;
     }
 
-
-
     public int alienDamageGivenCalculator() {
-        int damage = 0;
-
-        if(getPlayerWeapon().equalsIgnoreCase("claw")) {
-            damage = getClawMaxDamage() * getRandomHitsPerRole() * getRandomAccuracy();
-        } else {
-            damage = getLaserMaxDamage() * getRandomHitsPerRole() * getRandomAccuracy();
-        }
-//        return damage + getSpaceRoids();
-        return getSpecialDamage(damage);
-
-    }
-
-
-
-    public int alienDamageReceivedCalculator(int rawDamageDealt) {
         int damage = 1;
         int protection = 0;
         if(getPlayerWeapon().equalsIgnoreCase("claw")) {
-            damage = rawDamageDealt - (getClawRangeProtection() * getRandomAccuracy());
+            damage = getClawMaxDamage() * getRandomHitsPerRole() * getRandomAccuracy() ;
         } else {
-            damage = rawDamageDealt - (getLaserRangeProtection() * getRandomAccuracy());
+            damage = getLaserMaxDamage() * getRandomHitsPerRole() * getRandomAccuracy() ;
+        }
+//        return damage + getSpaceRoids(); now in player
+        return getSpecialDamage(damage) ;
+
+    }
+   public int alienDamageReceivedCalculator(int rawDamageDealt) {
+        int damage = 0;
+        int protection = 1;
+
+        if(getPlayerWeapon().equalsIgnoreCase("claw")) {
+            damage = rawDamageDealt - (getClawRangeProtection() * getRandomAccuracy()) * getSpaceRoids();
+        } else {
+            damage = rawDamageDealt - (getLaserRangeProtection() * getRandomAccuracy()) * getSpaceRoids();
         }
 
+        rawDamageDealt += this.getSharkAttack();
+        if(rawDamageDealt > protection) {
+           damage = rawDamageDealt - protection;
+        }
         if(rawDamageDealt > protection) {
             damage = rawDamageDealt - protection;
         }
         this.removeHealth(damage);
-        return damage;
+        return damage ;
     }
 
 
