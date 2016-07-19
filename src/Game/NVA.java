@@ -5,8 +5,6 @@ import Game.players.Alien;
 import Game.players.Ninja;
 
 
-
-
 /**
  * Created by perrythomson on 7/11/16.
  */
@@ -109,6 +107,10 @@ public class NVA {
 
 
     public void startBattle() {
+        int count = 1;
+        int startHealth = 1000;
+        int ninjawin = 0;
+        int alienwin = 0;
 
         if (playerType.equalsIgnoreCase("ninja")) {
             ninja.setPlayerName(name);
@@ -136,25 +138,40 @@ public class NVA {
         while (alien.getHealth() > 0 && ninja.getHealth() > 0) {
 
             int alienDamageReceived = alien.alienDamageReceivedCalculator(ninja.ninjaDamageGivenCalculator());
+                System.out.println(ninja.getPlayerName() + " attacks with the " + ninja.getPlayerWeapon() + " and deals " + alienDamageReceived + " points of damage."); {
 
-            System.out.println(ninja.getPlayerName() + " attacks with the " + ninja.getPlayerWeapon() + " and deals " + alienDamageReceived + " points of damage.");
-            {  // if statement needed for shark attack
 
-                int ninjaDamageReceived = ninja.ninjaDamageReceivedCalculator(alien.alienDamageGivenCalculator());
-                System.out.println(alien.getPlayerName() + " attacks with the " + alien.getPlayerWeapon() + " and deals " + ninjaDamageReceived + " points of damage.");
+                        System.out.println("This is the number of turns: "+ count);
+                        count++;
 
-                System.out.println(ninja.getPlayerName() + " Heath: " + ninja.getHealth() + "  vs  " + alien.getPlayerName() + " Health: " + alien.getHealth());
-                System.out.println(" ");
-// TODO this is where I will print out the attackCounter
+                    int ninjaDamageReceived = ninja.ninjaDamageReceivedCalculator(alien.alienDamageGivenCalculator());
+                        System.out.println(alien.getPlayerName() + " attacks with the " + alien.getPlayerWeapon() + " and deals " + ninjaDamageReceived + " points of damage.");
 
- //               System.out.println(" ");
-                System.out.println("Press [enter] to take another turn.");
-                String turn = PlayNVA.scanner.nextLine();
-                System.out.println(" ");
+                        System.out.println(ninja.getPlayerName() + " Heath: " + ninja.getHealth() + "  vs  " + alien.getPlayerName() + " Health: " + alien.getHealth());
+                        System.out.println(" ");
+
+                        if (ninjaDamageReceived > alienDamageReceived) {
+                            ninjawin++;
+                        }   else {
+                            alienwin++;
+                        }
+                        System.out.println("Alien has this many wins: " + alienwin);
+                        System.out.println("Ninja has this many wins: " + ninjawin);
+
+
+                        System.out.println("The average damage per hit is: " + (startHealth - alien.getHealth())/(count)    );
+                        System.out.println("The average damage per hit is: " + (startHealth - ninja.getHealth())/(count)    );
+
+                        System.out.println("Press [enter] to take another turn.");
+                        String turn = PlayNVA.scanner.nextLine();
+                        System.out.println(" ");
+
             }
 
             System.out.println("**********************************************");
 
+
+            }
 
             if (ninja.getHealth() > 0) {
                 System.out.println(ninja.getPlayerName() + " Wins!!!");
@@ -167,8 +184,19 @@ public class NVA {
                 System.out.println(ninja.getPlayerName() + " and " + alien.getPlayerName() + " both lose.");
             }
             System.out.println("**********************************************");
+
+//        while (count > 0) {
+//            System.out.println("Total turns taken :" + count);                // TODO this is where I will print out the attackCounter
+//            count++;
+//            return count;
         }
 
-
     }
-}
+
+//    private int maxNumber() {
+//        int maxNumber = 1000;
+//        return maxNumber;
+//    }
+
+
+

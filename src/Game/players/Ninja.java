@@ -84,7 +84,7 @@ public class Ninja extends Player {
             damage = rawDamageDealt - (getRandomStarProtection() * getRandomAccuracy() * getForestProtection());
         }
 
-        rawDamageDealt += this.getSharkAttack();
+        rawDamageDealt += getSharkAttack();
         if(rawDamageDealt > protection) {
             damage = rawDamageDealt - protection;
         }

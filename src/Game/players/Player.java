@@ -1,11 +1,12 @@
 package Game.players;
 
 import Game.util.RandInt;
-
+import java.awt.event.ActionEvent;
 /**
  * Created by perrythomson on 7/11/16.
  */
 public abstract class Player {
+
 
     private int health = 1000;
     private String playerName;
@@ -14,6 +15,16 @@ public abstract class Player {
     private String specialGift;
     private boolean isPain = false;
     private boolean sharkAttack = false;
+//    private int tTT = 1000; //totalturnstaken
+//
+//
+//    public int getTTT() {
+//        return tTT;
+//    }
+//
+//    public void incrementTTT(int tTT) {
+//        tTT += tTT;
+//    }
 
 
     public boolean getIsPain() {  //this is for the random special pain
@@ -24,7 +35,6 @@ public abstract class Player {
         this.isPain = isPain;
     }
 
-
     public int getHealth() {
         return health;
     }
@@ -32,7 +42,6 @@ public abstract class Player {
     public void removeHealth(int hit) {
         health -= hit;
     }
-
 
     public String getPlayerName() {
         return playerName;
@@ -101,6 +110,31 @@ public abstract class Player {
         return biteDamage;
     }
 
+//    public int tTT() {
+//        while (counter != limit) {
+//            if (counter < limit) {
+//                if (counter + inc <= limit) {
+//                    counter = counter + inc;
+//                    System.out.println(counter);
+//                } else {
+//                    break;
+//                }
+//            } else if (counter > limit) {
+//                if (counter - inc >= limit) {
+//                    counter = counter - inc;
+//                    System.out.println(counter);
+//                } else {
+//                    break;
+//                }
+//            }
+//        }
+//    return count;
+//    }
+}
+
+
+
+
 //    public int getSharkAttack() {
 //        int shark = 0;
 //        int randNum = RandInt.randomInt(0, 100);
@@ -112,4 +146,3 @@ public abstract class Player {
 //        return shark;
 //    }
 
-}
