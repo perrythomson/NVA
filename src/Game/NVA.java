@@ -145,6 +145,9 @@ public class NVA {
 
                 System.out.println(ninja.getPlayerName() + " Heath: " + ninja.getHealth() + "  vs  " + alien.getPlayerName() + " Health: " + alien.getHealth());
                 System.out.println(" ");
+// TODO this is where I will print out the attackCounter
+
+ //               System.out.println(" ");
                 System.out.println("Press [enter] to take another turn.");
                 String turn = PlayNVA.scanner.nextLine();
                 System.out.println(" ");
