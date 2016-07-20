@@ -11,7 +11,7 @@ public class Ninja extends Player {
     private int bladeRangeProtection = 2;
     private int starMaxDamage = 3;
     private int starRangeProtection = 4;
-    private int maxHitsPerRole = 4;
+    public int maxHitsPerRoll = 4;
     private int accuracy = 4;
     private int forestProtection = 6;
 
@@ -26,8 +26,8 @@ public class Ninja extends Player {
         return damage;
     }
 
-    private int getRandomHitsPerRole() {
-        int damage = RandInt.randomInt(1, maxHitsPerRole);
+    public int getRandomHitsPerRoll() {
+        int damage = RandInt.randomInt(1, maxHitsPerRoll);
         return damage;
     }
 
@@ -63,9 +63,9 @@ public class Ninja extends Player {
         int damage = 0;
         int protection = 1;
         if (getPlayerWeapon().equalsIgnoreCase("blade")) {
-            damage = getRandomBladeDamage() * getRandomHitsPerRole() * getRandomAccuracy();
+            damage = getRandomBladeDamage() * getRandomHitsPerRoll() * getRandomAccuracy();
         } else {
-            damage = getRandomStarDamage() * getRandomHitsPerRole() * getRandomAccuracy();
+            damage = getRandomStarDamage() * getRandomHitsPerRoll() * getRandomAccuracy();
         }
         return getSpecialDamage(damage);
     }

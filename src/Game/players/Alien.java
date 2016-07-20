@@ -11,7 +11,7 @@ public class Alien extends Player {
     private int clawRangeProtection = 6;
     private int laserMaxDamage = 4;
     private int laserRangeProtection = 14;
-    private int maxHitsPerRole = 4;
+    public int maxHitsPerRoll = 4;
     private int accuracy = 3;
     private int spaceRoids = 4;
 
@@ -23,8 +23,8 @@ public class Alien extends Player {
         int damage = RandInt.randomInt(1, laserMaxDamage);
         return damage;
     }
-    private int getRandomHitsPerRole() {
-        int damage = RandInt.randomInt(1, maxHitsPerRole);
+    public int getRandomHitsPerRoll() {
+        int damage = RandInt.randomInt(1, maxHitsPerRoll);
         return damage;
     }
     private int getRandomAccuracy() {
@@ -52,9 +52,9 @@ public class Alien extends Player {
         int damage = 1;
         int protection = 0;
         if(getPlayerWeapon().equalsIgnoreCase("claw")) {
-            damage = getClawMaxDamage() * getRandomHitsPerRole() * getRandomAccuracy() ;
+            damage = getClawMaxDamage() * getRandomHitsPerRoll() * getRandomAccuracy() ;
         } else {
-            damage = getLaserMaxDamage() * getRandomHitsPerRole() * getRandomAccuracy() ;
+            damage = getLaserMaxDamage() * getRandomHitsPerRoll() * getRandomAccuracy() ;
         }
 //        return damage + getSpaceRoids(); now in player
         return getSpecialDamage(damage) ;

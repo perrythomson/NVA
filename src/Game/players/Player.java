@@ -110,39 +110,9 @@ public abstract class Player {
         return biteDamage;
     }
 
-//    public int tTT() {
-//        while (counter != limit) {
-//            if (counter < limit) {
-//                if (counter + inc <= limit) {
-//                    counter = counter + inc;
-//                    System.out.println(counter);
-//                } else {
-//                    break;
-//                }
-//            } else if (counter > limit) {
-//                if (counter - inc >= limit) {
-//                    counter = counter - inc;
-//                    System.out.println(counter);
-//                } else {
-//                    break;
-//                }
-//            }
-//        }
-//    return count;
-//    }
 }
 
 
 
 
-//    public int getSharkAttack() {
-//        int shark = 0;
-//        int randNum = RandInt.randomInt(0, 100);
-//
-//        if (randnum <= 5) {
-//            shark = 100;
-//            System.out.println("bitten");
-//        }
-//        return shark;
-//    }
 
